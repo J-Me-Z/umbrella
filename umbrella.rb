@@ -1,4 +1,26 @@
-pp "howdy"
+
+pp "Where are you located?"
+
+user_location= gets.chomp
+
+pp user_location
+
+maps_url = "https://maps.googleapis.com/maps/api/geocode/json?address="+user_location + "&key=" + ENV.fetch("GMAPS_KEY")
+
+require "http"
+
+resp = HTTP.get(maps_url)
+
+raw_response = resp.to_s
+require "json"
+parsed_response =  JSON.parse(raw_response)
+results = parsed_response.fetch("results")
+first_result = pp results.at(0)
+pp geo= first_result.fetch("geometry")
+
+loc = geo.fetch("locaiton")
+
+
 # I've already created a string variable above: pirate_weather_api_key
 # It contains sensitive credentials that hackers would love to steal so it is hidden for security reasons.
 
