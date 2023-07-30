@@ -1,38 +1,42 @@
 
 pp "Where are you located?"
 
-#user_location= gets.chomp.gsub(" ","%20")
-user_location = "Cleveland"
+user_location= gets.chomp.gsub(" ","%20")
+#user_location = "Cleveland"
 
  pp user_location
 
  maps_url = "https://maps.googleapis.com/maps/api/geocode/json?address="+ user_location + "&key=" + ENV.fetch("GMAPS_KEY")
 
- pp maps_url
+ #pp maps_url
 
 require "http"
 
 resp = HTTP.get(maps_url)
 
-pp resp
+# pp resp
+raw_response = resp.to_s
+# pp raw_response
 
-# raw_response = resp.to_s
-# require "json"
-# parsed_response =  JSON.parse(raw_response)
-# results = parsed_response.fetch("results")
-# first_result = pp results.at(0)
-# pp geo= first_result.fetch("geometry")
+require "json"
+parsed_response =  JSON.parse(raw_response)
+# p parsed_response.keys
+results = parsed_response.fetch("results")
 
-# loc = geo.fetch("location")
-# first_result_hash = results_array.at(0)
+#pp results.at(0)
+first_result = results.at(0)
+ geo= first_result.fetch("geometry")
+
+pp loc = geo.fetch("location")
+
 
 # geometry_hash = first_result_hash.fetch("geometry")
 
 # location_hash = geometry_hash.fetch("location")
 
-# latitude = location_hash.fetch("lat")
+pp latitude= loc.fetch("lat")
 
-# longitude = location_hash.fetch("lng")
+pp longitude  = loc.fetch("lng")
 
 # puts "Your coordinates are #{latitude}, #{longitude}."
 
