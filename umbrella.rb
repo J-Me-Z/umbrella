@@ -57,10 +57,13 @@ raw_response = HTTP.get(pirate_weather_url)
 
 require "json"
 
-pp parsed_response = JSON.parse(raw_response)
+parsed_response = JSON.parse(raw_response)
 
-# currently_hash = parsed_response.fetch("currently")
+pp currently_hash = parsed_response.fetch("currently")
 
-# current_temp = currently_hash.fetch("temperature")
+current_temp = currently_hash.fetch("temperature")
+precip_prob = currently_hash.fetch("precipProbability")
 
-# puts "The current temperature is " + current_temp.to_s + "."
+pp precip_prob
+
+puts "The current temperature is " + current_temp.to_s + "."
