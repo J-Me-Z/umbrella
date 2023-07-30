@@ -40,24 +40,24 @@ pp longitude  = loc.fetch("lng")
 
 # puts "Your coordinates are #{latitude}, #{longitude}."
 
-
-
 # # I've already created a string variable above: pirate_weather_api_key
 # # It contains sensitive credentials that hackers would love to steal so it is hidden for security reasons.
 
-# require "http"
+require "http"
 
 # # Assemble the full URL string by adding the first part, the API token, and the last part together
 
-# pirate_weather_api_key = ENV.fetch("PIRATE_WEATHER_KEY")
-# pirate_weather_url = "https://api.pirateweather.net/forecast/" + pirate_weather_api_key + "/41.8887,-87.6355"
+ pirate_weather_api_key = ENV.fetch("PIRATE_WEATHER_KEY")
+ # pirate_weather_url = "https://api.pirateweather.net/forecast/" + pirate_weather_api_key + ,-87.6355"
+
+ pp pirate_weather_url = "https://api.pirateweather.net/forecast/#{pirate_weather_api_key}/#{latitude},#{longitude}"
 
 # # Place a GET request to the URL
-# raw_response = HTTP.get(pirate_weather_url)
+raw_response = HTTP.get(pirate_weather_url)
 
-# require "json"
+require "json"
 
-# parsed_response = JSON.parse(raw_response)
+pp parsed_response = JSON.parse(raw_response)
 
 # currently_hash = parsed_response.fetch("currently")
 
