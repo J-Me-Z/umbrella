@@ -1,7 +1,7 @@
 
 pp "Where are you located?"
 
-user_location= gets.chomp
+user_location= gets.chomp.gsub(" ","%20")
 
 pp user_location
 
@@ -18,7 +18,7 @@ results = parsed_response.fetch("results")
 first_result = pp results.at(0)
 pp geo= first_result.fetch("geometry")
 
-loc = geo.fetch("locaiton")
+loc = geo.fetch("location")
 
 
 # I've already created a string variable above: pirate_weather_api_key
