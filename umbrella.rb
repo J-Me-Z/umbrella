@@ -69,8 +69,9 @@ pp precip_prob
 puts "The current temperature is " + current_temp.to_s + "."
 
 #playing with minute data 
-Some locations around the world do not come with minutely data.
-  minutely_hash = parsed_pirate_weather_data.fetch("minutely", false)
+# Some locations around the world do not come with minutely data.
+  
+minutely_hash = parsed_response.fetch("minutely", false)
   
   if minutely_hash
     next_hour_summary = minutely_hash.fetch("summary")
@@ -78,36 +79,35 @@ Some locations around the world do not come with minutely data.
     puts "Next hour: #{next_hour_summary}"
   end
   
-  hourly_hash = parsed_pirate_weather_data.fetch("hourly")
+ hourly_hash = parsed_response.fetch("hourly")
   
-  hourly_data_array = hourly_hash.fetch("data")
+hourly_hash
+
+hourly_data_array = hourly_hash.fetch("data")
   
-  next_twelve_hours = hourly_data_array[1..12]
+pp next_twelve_hours = hourly_data_array[1..12]
   
-  precip_prob_threshold = 0.10
+ precip_prob_threshold = 0.10
   
-  any_precipitation = false
+any_precipitation = false
   
   next_twelve_hours.each do |hour_hash|
   
-    precip_prob = hour_hash.fetch("precipProbability")
+   precip_prob = hour_hash.fetch("precipProbability")
   
-    if precip_prob > precip_prob_threshold
-      any_precipitation = true
+   if precip_prob > precip_prob_threshold
+     any_precipitation = true
   
-      precip_time = Time.at(hour_hash.fetch("time"))
-  
-      seconds_from_now = precip_time - Time.now
-  
-      hours_from_now = seconds_from_now / 60 / 60
-  
-      puts "In #{hours_from_now.round} hours, there is a #{(precip_prob * 100).round}% chance of precipitation."
+     precip_time = Time.at(hour_hash.fetch("time"))
+    seconds_from_now = precip_time - Time.now
+     hours_from_now = seconds_from_now / 60 / 60
+     puts "In #{hours_from_now.round} hours, there is a #{(precip_prob * 100).round}% chance of precipitation."
     end
-  end
+ end
   
-  if any_precipitation == true
+   if any_precipitation == true
     puts "You might want to take an umbrella!"
-  else
+   else
     puts "You probably won't need an umbrella."
   end
   
